@@ -3445,3 +3445,97 @@ The OES will respond to the order submitted in the previous example with a BOTra
 
 Note 1: If the message was accepted MessageType = MessageType::REPLACED. If the message was rejected the MessageType = MessageType::REJECT and the reject reason will be in the RejectReason ﬁeld of the message.
 
+## EXECUTION/EXECUTION PARTIAL
+
+These two message types are generated when an incoming Quote interacts with a resting order \(order already on the book\). Upon receiving an Execution message, the order in the Market Data Order Book should be removed. Upon receiving an Execution Partial, the volume of the resting order should be updated to reﬂect the remaining order quantity.
+
+| Field Name | Data Type | Data Length | Buffer Offset | Required Field | Required Value | Example Value | Notes |
+| :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+| **Data1** | char | 1 | 0 | X | T | T | Header |
+| **Data2** | char | 1 | 1 |  |  |  | Header |
+| **Data3** | short | 2 | 2 | X | 238 | 238 | Header |
+| **MessageType** | short | 2 | 4 | \* | \* | EXECUTION/EXECUTION\_PARTIAL |  |
+| **Padding** | short | 2 | 6 |  |  |  | Not used |
+| **Account** | Int | 4 | 8 | X |  | 100700 |  |
+| **OrderID** | long | 8 | 12 | X |  | 46832153 |  |
+| **SymbolEnum** | short | 2 | 20 | X |  | 1 |  |
+| **OrderType** | short | 2 | 22 | X |  | LMT |  |
+| **SymbolType** | short | 2 | 24 | X |  | SPOT |  |
+| **BOPrice** | double | 8 | 26 | X |  | 51102.5 |  |
+| **BOSide** | short | 2 | 34 | X |  | BUY |  |
+| **BOOrderQty** | double  | 8 | 36 | X |  | 3.0 |  |
+| **TIF** | short | 2 | 44 | X |  | GTC |  |
+| **StopLimitPrice** | double | 8 | 46 |  |  |  |  |
+| **BOSymbol** | char\[\] | 12 | 54 | X |  | BTCUSD |  |
+| **OrigOrderID** | long | 8 | 66 | X |  | 46832152 |  |
+| **BOCancelShares** | double | 8 | 74 | \* |  |  |  |
+| **ExecID** | long | 8 | 82 | \* |  |  |  |
+| **ExecShares** | double | 8 | 90 | \* |  |  |  |
+| **RemainingQuantity** | double | 8 | 98 |  |  |  |  |
+| **ExecFee** | double  | 8 | 106 |  |  |  |  |
+| **ExpirationDate** | char\[\] | 12 | 114 |  |  |  |  |
+| **TraderID** | char\[\] | 6 | 126 |  |  | Not Used | Not used |
+| **RejectReason** | short | 2 | 132 |  |  |  |  |
+| **SendingTime** | uint64\_t | 8 | 134 | X |  |  |  |
+| **TradingSessionID** | Int | 4 | 142 | X |  | 506 |  |
+| **Key** | Int | 4 | 146 | X |  | 42341 | Note 8 |
+| **DisplaySize** | double | 8 | 150 | \* |  |  |   |
+| **RefreshSize** | double  | 8 | 158 | \* |  |  |  |
+| **Layers** | short | 2 | 166 |  |  |  |  |
+| **SizeIncrement** | double | 8 | 168 |  |  |  |  |
+| **PriceIncrement** | double | 8 | 176 |  |  |  |  |
+| **PriceOffset** | double | 8 | 184 |  |  |  |  |
+| **BOOrigPrice** | double | 8 | 192 |  |  | 50100.5 | Note 10 |
+| **ExecPrice** | double | 8 | 200 |  |  |  |  |
+| **MsgSeqNum** | long | 8 | 208 | X |  | 7948888 |  |
+| **TakeProfitPrice** | double | 8 | 216 |  |  |  |  |
+| **TriggerType** | short | 2 | 224 |  |  |  |  |
+| **Attributes** | char\[\] | 12 | 226 | \* |  |  | Note 7 |
+
+## QUOTE\_FILL /PARTIAL
+
+ These two message types are generated when an incoming Quote interacts with a resting order \(order already on the book\). Upon receiving an Execution message, the order in the Market Data Order Book should be removed. Upon receiving an Execution Partial, the volume of the resting order should be updated to reﬂect the remaining order quantity.
+
+| Field Name | Data Type | Data Length | Buffer Offset | Required Field | Required Value | Example Value | Notes |
+| :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+| **Data1** | char | 1 | 0 | X | T | T | Header |
+| **Data2** | char | 1 | 1 |  |  |  | Header |
+| **Data3** | short | 2 | 2 | X | 238 | 238 | Header |
+| **MessageType** | short | 2 | 4 | \* |  | QUOTE\_FILL/QUOTE\_FILL\_PARTIAL |  |
+| **Padding** | short | 2 | 6 |  |  |  | Not used |
+| **Account** | Int | 4 | 8 | X |  | 100700 |  |
+| **OrderID** | long | 8 | 12 | X |  | 46832153 |  |
+| **SymbolEnum** | short | 2 | 20 | X |  | 1 |  |
+| **OrderType** | short | 2 | 22 | X |  | LMT |  |
+| **SymbolType** | short | 2 | 24 | X |  | SPOT |  |
+| **BOPrice** | double | 8 | 26 | X |  | 51102.5 |  |
+| **BOSide** | short | 2 | 34 | X |  | BUY |  |
+| **BOOrderQty** | double  | 8 | 36 | X |  | 3.0 |  |
+| **TIF** | short | 2 | 44 | X |  | GTC |  |
+| **StopLimitPrice** | double | 8 | 46 |  |  |  |  |
+| **BOSymbol** | char\[\] | 12 | 54 | X |  | BTCUSD |  |
+| **OrigOrderID** | long | 8 | 66 | X |  | 46832152 |  |
+| **BOCancelShares** | double | 8 | 74 | \* |  |  |  |
+| **ExecID** | long | 8 | 82 | \* |  |  |  |
+| **ExecShares** | double | 8 | 90 | \* |  |  |  |
+| **RemainingQuantity** | double | 8 | 98 |  |  |  |  |
+| **ExecFee** | double  | 8 | 106 |  |  |  |  |
+| **ExpirationDate** | char\[\] | 12 | 114 |  |  |  |  |
+| **TraderID** | char\[\] | 6 | 126 |  |  | Not Used | Not used |
+| **RejectReason** | short | 2 | 132 |  |  |  |  |
+| **SendingTime** | uint64\_t | 8 | 134 | X |  |  |  |
+| **TradingSessionID** | Int | 4 | 142 | X |  | 506 |  |
+| **Key** | Int | 4 | 146 | X |  | 42341 | Note 8 |
+| **DisplaySize** | double | 8 | 150 | \* |  |  |   |
+| **RefreshSize** | double  | 8 | 158 | \* |  |  |  |
+| **Layers** | short | 2 | 166 |  |  |  |  |
+| **SizeIncrement** | double | 8 | 168 |  |  |  |  |
+| **PriceIncrement** | double | 8 | 176 |  |  |  |  |
+| **PriceOffset** | double | 8 | 184 |  |  |  |  |
+| **BOOrigPrice** | double | 8 | 192 |  |  | 50100.5 | Note 10 |
+| **ExecPrice** | double | 8 | 200 |  |  |  |  |
+| **MsgSeqNum** | long | 8 | 208 | X |  | 7948888 |  |
+| **TakeProfitPrice** | double | 8 | 216 |  |  |  |  |
+| **TriggerType** | short | 2 | 224 |  |  |  |  |
+| **Attributes** | char\[\] | 12 | 226 | \* |  |  | Note 7 |
+
